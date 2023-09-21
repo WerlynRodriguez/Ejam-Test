@@ -1,0 +1,107 @@
+---
+import StarsDisplay from './StarsDisplay.astro';
+interface Props {
+    /** The title of the product */
+    tittle: string;
+    /** The price or the price range of the product */
+    price: number | { before: number; after: number };
+    /** The stars of the product (1-5) */
+    stars: number;
+    /** The image of the product */
+    image: string;
+    /** The description of the product */
+    desc: string;
+    /** The stock of the product */
+    stock: number;
+}
+
+const { tittle, price, stars, image, desc, stock }: Props = Astro.props;
+---
+
+<article class="simple-product">
+    <img src={image} alt="Product image" />
+    <aside>
+        <div>
+            <h3>{tittle}</h3>
+            <span class="price">
+                {typeof price === 'number' ? 
+                    `$${price}` 
+                    : 
+                    <>
+                        <span class="before">${price.before}</span>
+                        {`$${price.after}`}
+                    </>
+                }
+            </span>
+        </div>
+        <StarsDisplay count={stars} />
+        <span class=`stock`>
+            <i class="dot"/>
+            {stock} left in Stock
+        </span>
+        <p class="desc">{desc}</p>
+    </aside>
+</article>
+
+<style>
+    .simple-product {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+
+        & img {
+            background-color: var(--accent);
+            border-radius: var(--space-2);
+        }
+
+        & aside {
+
+            &div {
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+
+                & h3 {
+                    font-weight: 400;
+                }
+                & .price {
+                    color: var(--accent);
+                    font-weight: 600;
+    
+                    & .before {
+                        text-decoration: line-through;
+                        margin-right: 0.5rem;
+                        color: #969696;
+                    }
+                }
+            }
+
+            & .stock {
+                display: inline-flex;
+                align-items: center;
+
+                font-weight: 300;
+                color: #37465A;
+
+                & .dot {
+                    display: inline-block;
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border-radius: 50%;
+                    background-color: var(--accent);
+                    border: var(--space-1) solid var(--accent-light);
+                    margin-right: 0.5rem;
+                }
+            }
+
+            & .desc {
+                font-size: 0.1rem;
+                color: #4D5254;
+            }
+
+        }
+    }
+</style>

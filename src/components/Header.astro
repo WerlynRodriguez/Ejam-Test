@@ -1,0 +1,21 @@
+<header>
+    <img src="/clarifion-logo.svg" alt="Logo" class="logo">
+    <div class="container-security">
+        <img src="/antivirus/mcaffe-logo.svg" alt="Mcaffe" class="logo">
+        <img src="/antivirus/norton-logo.svg" alt="Norton" class="logo">
+    </div>
+</header>
+
+<style>
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-4) var(--space-side);
+
+        & .container-security {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+    }
+</style>

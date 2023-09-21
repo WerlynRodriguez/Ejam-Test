@@ -1,0 +1,23 @@
+---
+import Sign from "./Sign.astro";
+---
+
+<div class="container-signs">
+    <Sign text="30-DAY SATISFACTION GUARANTEE" icon="checkmark"/>
+    <Sign text="Free delivery on orders over $40.00" icon="truck"/>
+    <Sign text="50.000+ HAPPY CUSTOMERS" icon="heart"/>
+    <Sign text="100% Money Back Guarantee" icon="arrow-sync-checkmark"/>
+</div>
+
+<style>
+    .container-signs {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: var(--space-3) var(--space-side);
+
+        background-color: var(--bg-contrast);
+    }
+</style>
