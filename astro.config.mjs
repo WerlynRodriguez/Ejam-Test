@@ -2,5 +2,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    base: 'https://WerlynRodriguez.github.io/EjamTest/',
+    site: 'https://WerlynRodriguez.github.io',
+    base: '/EjamTest',
 });
