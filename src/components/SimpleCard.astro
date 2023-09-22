@@ -21,15 +21,15 @@ const { tittle, price, stars, image, desc, stock }: Props = Astro.props;
 <article class="simple-product">
     <img src={image} alt="Product image" />
     <aside>
-        <div>
+        <div class="tittle-price">
             <h3>{tittle}</h3>
             <span class="price">
                 {typeof price === 'number' ? 
-                    `$${price}` 
+                    <em>{price}</em>
                     : 
                     <>
                         <span class="before">${price.before}</span>
-                        {`$${price.after}`}
+                        <em>${price.after}</em>
                     </>
                 }
             </span>
@@ -39,49 +39,74 @@ const { tittle, price, stars, image, desc, stock }: Props = Astro.props;
             <i class="dot"/>
             {stock} left in Stock
         </span>
-        <p class="desc">{desc}</p>
     </aside>
+    <p class="desc">{desc}</p>
 </article>
 
 <style>
     .simple-product {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-3);
-
-        border: 1px solid #ccc;
-        border-radius: 0.5rem;
-
+        display: -ms-grid;
+        display: grid;
+            grid-template-areas: "image aside"
+                                "image desc";
+        -ms-grid-columns: .5fr var(--space-2) 2fr;
+        grid-template-columns: .5fr 2fr;
+        -ms-grid-rows: auto var(--space-2) auto;
+        grid-template-rows: auto auto;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        gap: var(--space-2);
         & img {
+            -ms-grid-row: 1;
+            -ms-grid-row-span: 3;
+            -ms-grid-column: 1;
+            grid-area: image;
             background-color: var(--accent);
             border-radius: var(--space-2);
         }
-
         & aside {
+            -ms-grid-row: 1;
+            -ms-grid-column: 3;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            grid-area: aside;
+            & .tittle-price {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                        justify-content: space-between;
 
-            &div {
-                display: inline-flex;
-                align-items: center;
-                justify-content: space-between;
-
-                & h3 {
-                    font-weight: 400;
-                }
+                & h3 { font-weight: 400; }
                 & .price {
-                    color: var(--accent);
                     font-weight: 600;
+                    font-size: 1.2rem;
     
                     & .before {
                         text-decoration: line-through;
                         margin-right: 0.5rem;
+                        font-size: 0.9rem;
                         color: #969696;
                     }
                 }
             }
-
             & .stock {
+                display: -webkit-inline-box;
+                display: -ms-inline-flexbox;
                 display: inline-flex;
-                align-items: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
 
                 font-weight: 300;
                 color: #37465A;
@@ -96,12 +121,34 @@ const { tittle, price, stars, image, desc, stock }: Props = Astro.props;
                     margin-right: 0.5rem;
                 }
             }
+        }
+        & .desc {
+            -ms-grid-row: 3;
+            -ms-grid-column: 3;
+            grid-area: desc;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+    }
 
-            & .desc {
-                font-size: 0.1rem;
-                color: #4D5254;
-            }
-
+    @media screen and (max-width: 800px) {
+        .simple-product {
+                grid-template-areas: "image aside"
+                                    "desc desc";
+        }
+        & img {
+                -ms-grid-row: 1;
+                -ms-grid-row-span: 1;
+                -ms-grid-column: 1;
+        }
+        & aside {
+                -ms-grid-row: 1;
+                -ms-grid-column: 2;
+        }
+        & .desc {
+                -ms-grid-row: 2;
+                -ms-grid-column: 1;
+                -ms-grid-column-span: 2;
         }
     }
 </style>

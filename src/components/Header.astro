@@ -1,21 +1,38 @@
 <header>
     <img src="/clarifion-logo.svg" alt="Logo" class="logo">
     <div class="container-security">
-        <img src="/antivirus/mcaffe-logo.svg" alt="Mcaffe" class="logo">
-        <img src="/antivirus/norton-logo.svg" alt="Norton" class="logo">
+        <img src="/antivirus/mcaffe-logo.svg" alt="Mcaffe">
+        <img src="/antivirus/norton-logo.svg" alt="Norton">
     </div>
 </header>
 
 <style>
     header {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         padding: var(--space-4) var(--space-side);
 
         & .container-security {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
             display: inline-flex;
-            align-items: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
             gap: var(--space-2);
+
+            & img {
+                width: 10vw;
+                max-width: 80px;
+            }
+        }
+        & .logo {
+            width: 30vw;
+            max-width: 200px;
         }
     }
 </style>

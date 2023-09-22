@@ -1,27 +1,18 @@
----
-interface Props {
-    icon?: string;
-    text: string;
-}
+<div class="sign">
+    <slot/>
+</div>
 
-const { icon, text } = Astro.props;
----
-
-<span class="Sign">
-    { icon && <img src={`/icon/${icon}.svg`} alt={icon} /> }
-    { text }
-</span>
-
-<style>
-    .Sign {
+<style is:global>
+    .sign {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
         display: inline-flex;
-        place-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         gap: var(--space-2);
-
-        padding: 0 0.5rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-
-        color: #fff;
     }
 </style>

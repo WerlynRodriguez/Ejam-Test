@@ -1,0 +1,42 @@
+---
+import Icon from "./Icon.astro";
+import Sign from "./Sign.astro";
+
+---
+
+<footer>
+    Copyright (c) 2023 | Clarifionsupport@clarifion.com
+    <Sign>
+        <Icon icon='lock' size='small'/>
+        Secure 256-bit SSL encryption.
+    </Sign>
+</footer>
+
+<style>
+    footer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        padding: var(--space-4) var(--space-side);
+
+        font-size: 0.9rem;
+
+        background-color: var(--bg-contrast);
+        color: var(--text-contrast);
+    }
+
+    @media screen and (max-width: 800px) {
+        footer {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+        }
+    }
+</style>

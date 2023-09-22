@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+    icon?: string;
+}
+
+const { icon } = Astro.props;
+---
+
+<span class="largeBadge">
+    {icon && <Icon icon={icon} type='primary'/>}
+    <span class="LargeBadge__content">
+        <slot />
+    </span>
+</span>
+
+<style is:global>
+    .largeBadge {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        padding: var(--space-3);
+        margin: var(--space-3) 0;
+
+        border-radius: var(--space-2);
+        background-color: var(--accent-light);
+
+        & .icon { margin-right: var(--space-3); }
+    }
+</style>

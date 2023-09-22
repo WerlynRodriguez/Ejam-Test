@@ -1,0 +1,68 @@
+---
+interface Props {
+    text: string;
+    type: 'danger' | 'success';
+}
+
+const { text, type }: Props = Astro.props;
+---
+
+<button class={`btn btn__${type}`}>
+    <slot name="left-icon"/>
+    {text}
+    <slot name="right-icon"/>
+</button>
+
+<style is:global>
+    .btn {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        gap: var(--space-2);
+
+        width: 100%;
+        border-radius: var(--space-4);
+        border: none;
+        padding: var(--space-3) var(--space-4);
+        margin: var(--space-3) 0;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        outline: none;
+        color: var(--bg);
+
+        font-size: 1rem;
+        line-height: 1.3rem;
+
+        -webkit-transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+
+        transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+
+        -o-transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+        -webkit-tap-highlight-color: transparent;
+
+        &:hover { opacity: 0.8; }
+        &:active { opacity: 0.6; -webkit-transform: scale(0.95); -ms-transform: scale(0.95); transform: scale(0.95); }
+
+        &.btn__danger {
+            background-color: transparent;
+            font-weight: 500;
+            color: #F82C2C;
+            text-decoration: underline;
+        }
+        &.btn__success { 
+            background-color: #59AE43;
+            font-weight: 700;
+        }
+    }
+</style>

@@ -1,0 +1,94 @@
+---
+import Icon from './Icon.astro';
+import StarsDisplay from './StarsDisplay.astro';
+interface Props {
+    comment: string;
+    name: string;
+    picture: string;
+    stars: number;
+    verified: boolean;
+}
+
+const { comment, name, picture, stars, verified }: Props = Astro.props;
+---
+
+<div class="comment">
+    <span class={`user ${verified ? 'verified' : ''}`}>
+        <img src={picture} alt={name} class="user-image" />
+        <span class="name">
+            {name}
+        </span>
+        <StarsDisplay count={stars} size={1} />
+    </span>
+    {`“${comment}”`}
+</div>
+  
+<style is:global>
+    .comment {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        padding: var(--space-3);
+        border-radius: var(--space-2);
+        background-color: var(--bg);
+
+        & .user {
+            display: -ms-grid;
+            display: grid;
+                grid-template-areas: 'image stars'
+                                    'image name';
+            -ms-grid-columns: auto var(--space-2) 1fr;
+            grid-template-columns: auto 1fr;
+            -ms-grid-rows: 1rem var(--space-2) 1.5rem;
+            grid-template-rows: 1rem 1.5rem;
+            grid-gap: var(--space-2);
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin-bottom: var(--space-2);
+
+            & .user-image {
+                -ms-grid-row: 1;
+                -ms-grid-row-span: 3;
+                -ms-grid-column: 1;
+                grid-area: image;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                -o-object-fit: cover;
+                   object-fit: cover;
+            }
+
+            & .name {
+                -ms-grid-row: 3;
+                -ms-grid-column: 3;
+                grid-area: name;
+                position: relative;
+                display: -webkit-inline-box;
+                display: -ms-inline-flexbox;
+                display: inline-flex;
+
+                font-weight: bold;
+
+                & .icon { 
+                    opacity: 0.5;
+                }
+            }
+
+            & .stars { -ms-grid-row: 1; -ms-grid-column: 3; grid-area: stars; }
+
+            &.verified {
+                & .name::after {
+                    content: 'Verified Customer';
+                    color: #5BB59A;
+                    margin-left: var(--space-2);
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+</style>

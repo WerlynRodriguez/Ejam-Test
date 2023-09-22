@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 interface Props {
     status: "success" | "actual" | "pending";
     number: number;
@@ -8,11 +9,11 @@ interface Props {
 const { status, text, number }: Props = Astro.props;
 ---
 
-<span class=`step ${status}`>
+<span class=`btn step ${status}`>
     <span class="step__icon">
         <!-- If the Step is "succes" render an icon of checkmarck -->
         {status === "success" ?
-            <img src="/icon/tick-circle.svg" alt="Checkmark" />
+            <Icon icon='tick-circle' />
             :
             number
         }
@@ -22,34 +23,51 @@ const { status, text, number }: Props = Astro.props;
 
 <style>
     .step {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        margin-bottom: var(--space-2);
+        text-transform: none;
+        padding: var(--space-2) var(--space-3);
         font-size: 1rem;
         font-weight: 500;
-        color: #000;
-
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+        color: var(--text);
+        border-radius: var(--space-2);
+        
         & .step__icon {
             aspect-ratio: 1;
             width: 2rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
             border-radius: 50%;
             
             margin-right: 1rem;
         }
-
         &.success .step__icon {
             background-color: #85BF55;
             color: #fff;
         }
-
-        &.actual .step__icon {
-            background-color: var(--accent);
-            color: #fff;
+        &.actual {
+            font-weight: 700; 
+            & .step__icon {
+                background-color: var(--accent);
+                color: #fff;
+            }
         }
-
         &.pending .step__icon {
             border: 1px solid var(--accent);
             color: var(--accent);

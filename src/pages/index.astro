@@ -1,13 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import InfoSigns from '../components/InfoSigns.astro';
 import Header from '../components/Header.astro';
 import StepIndicator from '../components/StepIndicator.astro';
 import SimpleCard from '../components/SimpleCard.astro';
+import LargeBadge from '../components/LargeBadge.astro';
+import Sign from '../components/Sign.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Separator from '../components/Separator.astro';
+import Comment from '../components/Comment.astro';
+
+const payWays = ['visa', 'shop', 'paypal', 'mastercard', 'gpay', 'apple', 'amex']
+const product = {
+	tittle: 'Clarifion Air Ionizer',
+	price: {
+		before: 180,
+		after: 84
+	},
+	stars: 5,
+	stock: 12,
+	desc: 'Simply plug a Clarifion into any standard outlet and replace bulky, expensive air purifiers with a simple.',
+	image: '/product/Product-1.png',
+	firstComment : {
+		comment: "As soon as the Clarifions arrived I put one in my bedroom. This was late in the afternoon. When I went to the bedroom in the evening it smelled clean. When I went to bed I felt I could breathe better. Wonderful.",
+		name: "Ken T.",
+		picture: "/custommer/custommer-1.png",
+		stars: 5,
+		verified: true
+	}
+}
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={product.tittle}>
 	<InfoSigns />
 	<Header />
 	<span class="information">
@@ -21,26 +46,60 @@ import SimpleCard from '../components/SimpleCard.astro';
 		<StepIndicator status='pending' number={4} text='Confirmation' />
 	</div>
 	<main>
-		<div>
-			xd
-		</div>
-		<div>
-			<SimpleCard 
-				tittle='Clarifion Air Ionizer'
-				price={{
-					before: 180,
-					after: 84
-				}}
-				stars={5}
-				stock={0}
-				desc='Simply plug a Clarifion into any standard outlet and replace bulky, expensive air purifiers with a simple.'
-				image='/product/Product-1.png'
-			/>
-		</div>
+		<section id="product">
+			<img src="/product/Product-1_Big.png" alt="BigImage"/>
+			<Comment {...product.firstComment} />
+		</section>
+		<section id="checkout">
+			<h2 class="tittle">
+				<em>ONE TIME ONLY</em> Special Price For 6 Extra Clarifion For Only <em>$14 Each</em> ($84.00 Total!)
+			</h2>
+			<SimpleCard {...product} />
+			<div class="benefit-signs">
+				<Sign>
+					<Icon icon='tick-circle'/>
+					<span>Negative Ion Technology may <b>help with allergens</b></span>
+				</Sign>
+				<Sign>
+					<Icon icon='tick-circle'/>
+					<span>Designed for <b>air rejuvenation</b></span>
+				</Sign>
+
+				<Sign>
+					<Icon icon='tick-circle'/>
+					<span><b>Perfect for every room</b> in all types of places</span>
+				</Sign>
+			</div>
+
+			<LargeBadge icon='percent'>
+				Save <em>53%</em> and get <em>6 extra Clarifision</em> for only <em>$14 Each</em>.
+			</LargeBadge>
+
+			<Button type='success' text='Yes - Claim my discount'>
+				<Icon icon='right-arrow' slot='right-icon' />
+			</Button>
+			<Separator>
+				<span>Free shipping</span>
+				<Sign>
+					<Icon icon='lock' size='small'/>
+					Secure 256-bit SSL encryption.
+				</Sign>
+				<span>
+					{payWays.map(payWay => (
+						<img src={`/payWays/${payWay}.svg`} />
+					))}
+				</span>
+			</Separator>
+			<Button type='danger' text='No thanks, I don’t want this.'/>
+			<div id="guarantee">
+				<img src="/guarantee.svg" />
+				<p> If you are not completely thrilled with your Clarifion - We have a <b>30 day satisfaction guarantee.</b> Please refer to our return policy at the bottom of the page for more details. Happy Shopping! </p>
+			</div>
+		</section>
 	</main>
 </Layout>
 
-<style>
+<style is:global>
 	.information {
 		text-align: center;
 		gap: 1rem;
@@ -59,20 +118,103 @@ import SimpleCard from '../components/SimpleCard.astro';
 		}
 	}
 	.step-indicators {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
 		margin: 2rem var(--space-side);
 	}
-
 	main {
+		display: -ms-grid;
 		display: grid;
+		-ms-grid-columns: 1fr 1rem 1fr;
 		grid-template-columns: 1fr 1fr;
-		margin: 0 var(--space-side);
+		margin: var(--space-3) var(--space-side);
 		gap: 2rem;
 		padding: 2rem;
 		border-radius: var(--space-2);
-
 		background-color: var(--bg-secondary);
+		& .tittle {
+			font-weight: 400;
+			margin: 0;
+			padding: 0;
+		}
+		& #product {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			    -ms-flex-direction: column;
+			        flex-direction: column;
+			-webkit-box-pack: start;
+			    -ms-flex-pack: start;
+			        justify-content: flex-start;
+			& img {
+				width: 100%;
+				height: auto;
+				margin-bottom: var(--space-3);
+			}
+		}
+		& #checkout {
+			& .separator-container {
+				font-size: 0.6rem;
+			}
+			& #guarantee {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-align: center;
+				    -ms-flex-align: center;
+				        align-items: center;
+				gap: 1rem;
+				& img {
+					width: 5rem;
+					height: 5rem;
+				}
+				& p {
+					margin: 0;
+					font-size: 1rem;
+					font-weight: 400;
+					color: var(--text-secondary);
+				}
+			}
+			& .benefit-signs .icon {
+				background-color: var(--accent);
+			}
+		}
+	}
+	/* On mobile devices */
+	@media screen and (max-width: 800px) {
+		.step-indicators {
+			-webkit-box-align: start;
+			    -ms-flex-align: start;
+			        align-items: flex-start;
+			overflow-x: scroll;
+
+			& .step {
+				-webkit-box-orient: vertical;
+				-webkit-box-direction: normal;
+				    -ms-flex-direction: column;
+				        flex-direction: column;
+			}
+		}
+		main {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			    -ms-flex-direction: column;
+			        flex-direction: column;
+			& #product {
+				display: none;
+			}
+		}
 	}
 </style>

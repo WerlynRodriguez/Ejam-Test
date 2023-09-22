@@ -1,0 +1,43 @@
+<div class="separator-container">
+    <slot />
+</div>
+
+<style is:global>
+    .separator-container {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        width: 100%;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        padding: var(--space-2) var(--space-3);
+
+        border: 1px solid #e4e4e4;
+        border-radius: var(--space-2);
+        color: var(--text-secondary);
+
+        & > *:not(:last-child) {
+            position: relative;
+            padding-right: var(--space-3);
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 0;
+                -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                width: 2px;
+                height: var(--space-3);
+                background-color: #e4e4e4;
+            }
+        }
+    }
+</style>

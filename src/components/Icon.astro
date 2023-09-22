@@ -1,0 +1,31 @@
+---
+
+interface Props {
+    icon: string;
+    type?: 'primary' | 'outline';
+    /** Medium by default */
+    size?: 'small' | 'large';
+}
+
+const { icon, type, size }: Props = Astro.props;
+---
+
+<img src={`/icon/${icon}.svg`} class={`icon icon__${type} icon__${size}`} />
+
+<style is:global>
+    .icon {
+        position: relative;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        aspect-ratio: 1/1;
+        width: 2rem;
+        padding: var(--space-1);
+        border-radius: 50%;
+
+        &.icon__small { width: 1.2rem; padding: 0.1rem; }
+        &.icon__large { width: 2.5rem; padding: var(--space-2); }
+
+        &.icon__primary { background-color: var(--accent); }
+        &.icon__outline { border: 1px solid var(--accent); }
+    }
+</style>
