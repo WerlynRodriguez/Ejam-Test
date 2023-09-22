@@ -10,6 +10,7 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import Separator from '../components/Separator.astro';
 import Comment from '../components/Comment.astro';
+import getURL from '../settings';
 
 const payWays = ['visa', 'shop', 'paypal', 'mastercard', 'gpay', 'apple', 'amex']
 const product = {
@@ -21,11 +22,11 @@ const product = {
 	stars: 5,
 	stock: 12,
 	desc: 'Simply plug a Clarifion into any standard outlet and replace bulky, expensive air purifiers with a simple.',
-	image: '/product/Product-1.png',
+	image: 'product/Product-1.png',
 	firstComment : {
 		comment: "As soon as the Clarifions arrived I put one in my bedroom. This was late in the afternoon. When I went to the bedroom in the evening it smelled clean. When I went to bed I felt I could breathe better. Wonderful.",
 		name: "Ken T.",
-		picture: "/custommer/custommer-1.png",
+		picture: "custommer/custommer-1.png",
 		stars: 5,
 		verified: true
 	}
@@ -47,7 +48,7 @@ const product = {
 	</div>
 	<main>
 		<section id="product">
-			<img src="/product/Product-1_Big.png" alt="BigImage"/>
+			<img src={getURL("product/Product-1_Big.png")} alt="BigImage"/>
 			<Comment {...product.firstComment} />
 		</section>
 		<section id="checkout">
@@ -86,13 +87,13 @@ const product = {
 				</Sign>
 				<span>
 					{payWays.map(payWay => (
-						<img src={`/payWays/${payWay}.svg`} />
+						<img src={getURL(`payWays/${payWay}.svg`)} />
 					))}
 				</span>
 			</Separator>
 			<Button type='danger' text='No thanks, I don’t want this.'/>
 			<div id="guarantee">
-				<img src="/guarantee.svg" />
+				<img src={getURL("guarantee.svg")} />
 				<p> If you are not completely thrilled with your Clarifion - We have a <b>30 day satisfaction guarantee.</b> Please refer to our return policy at the bottom of the page for more details. Happy Shopping! </p>
 			</div>
 		</section>

@@ -1,4 +1,5 @@
 ---
+import getURL from '../settings';
 import StarsDisplay from './StarsDisplay.astro';
 interface Props {
     /** The title of the product */
@@ -19,7 +20,7 @@ const { tittle, price, stars, image, desc, stock }: Props = Astro.props;
 ---
 
 <article class="simple-product">
-    <img src={image} alt="Product image" />
+    <img src={getURL(image)} alt="Product image" />
     <aside>
         <div class="tittle-price">
             <h3>{tittle}</h3>

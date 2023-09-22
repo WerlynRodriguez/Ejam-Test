@@ -1,8 +1,12 @@
+---
+import getURL from "../settings";
+---
+
 <header>
-    <img src="/clarifion-logo.svg" alt="Logo" class="logo">
+    <img src={getURL("clarifion-logo.svg")} alt="Logo" class="logo">
     <div class="container-security">
-        <img src="/antivirus/mcaffe-logo.svg" alt="Mcaffe">
-        <img src="/antivirus/norton-logo.svg" alt="Norton">
+        <img src={getURL("antivirus/mcaffe-logo.svg")} alt="Mcaffe">
+        <img src={getURL("antivirus/norton-logo.svg")} alt="Norton">
     </div>
 </header>
 

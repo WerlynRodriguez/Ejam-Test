@@ -1,5 +1,5 @@
 ---
-import Icon from './Icon.astro';
+import getURL from '../settings';
 import StarsDisplay from './StarsDisplay.astro';
 interface Props {
     comment: string;
@@ -14,7 +14,7 @@ const { comment, name, picture, stars, verified }: Props = Astro.props;
 
 <div class="comment">
     <span class={`user ${verified ? 'verified' : ''}`}>
-        <img src={picture} alt={name} class="user-image" />
+        <img src={getURL(picture)} alt={name} class="user-image" />
         <span class="name">
             {name}
         </span>

@@ -1,5 +1,5 @@
 ---
-
+import getURL from '../settings';
 interface Props {
     icon: string;
     type?: 'primary' | 'outline';
@@ -10,7 +10,7 @@ interface Props {
 const { icon, type, size }: Props = Astro.props;
 ---
 
-<img src={`/icon/${icon}.svg`} class={`icon icon__${type} icon__${size}`} />
+<img src={getURL(`icon/${icon}.svg`)} class={`icon icon__${type} icon__${size}`} />
 
 <style is:global>
     .icon {
